@@ -1,3 +1,2 @@
-city,timestamp,temperature,humidity,pressure,wind_speed,weather
-Lahore,2025-07-24 21:44:05,30.89,82,996,0.18,Clouds
-Lahore,2025-07-24 21:44:12,31.04,74,995,0.99,Clouds
+City,Temperature,Humidity,Weather
+London,298.16,56,overcast clouds
