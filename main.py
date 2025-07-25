@@ -4,8 +4,11 @@ import pandas as pd
 from datetime import datetime
 
 # Get the key from your Replit secrets
-API_KEY = os.environ['RABIA_API_KEY']
-CITY = "Lahore"
+import os
+
+API_KEY = os.environ.get('RABIA_API_KEY', 'NOT FOUND')
+print("API Key from GitHub Secret:", API_KEY)
+CITY = "Gujrat"
 
 url = f"https://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}&units=metric"
 response = requests.get(url)
