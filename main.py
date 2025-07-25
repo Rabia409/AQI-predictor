@@ -5,9 +5,11 @@ from datetime import datetime
 
 # Get the key from your Replit secrets
 import os
-API_KEY = os.environ.get('RABIA_API_KEY', 'NOT FOUND')
-print("API Key from GitHub Secret:", API_KEY)
-CITY = "Gujrat"
+API_KEY = os.environ.get('RABIA_API_KEY')
+CITY = "Lahore"
+
+if not API_KEY:
+    raise ValueError("API Key is missing! Check GitHub secrets.")
 
 url = f"https://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}&units=metric"
 response = requests.get(url)
