@@ -1,40 +1,34 @@
-import os
 import requests
-import pandas as pd
-from datetime import datetime
-
-# Get the key from your Replit secrets
+import csv
 import os
-API_KEY = os.environ.get('RABIA_API_KEY')
-CITY = "Lahore"
 
+# Get API key from environment variable
+API_KEY = os.environ.get("RABIA_API_KEY")
 if not API_KEY:
-    raise ValueError("API Key is missing! Check GitHub secrets.")
+    raise ValueError("API Key is missing. Check if GitHub secret is set properly.")
 
-url = f"https://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}&units=metric"
+# Set up URL
+city = "London"
+url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
+
+# Get data
 response = requests.get(url)
 data = response.json()
 
-# Extract useful features
-features = {
-    "city": CITY,
-    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    "temperature": data['main']['temp'],
-    "humidity": data['main']['humidity'],
-    "pressure": data['main']['pressure'],
-    "wind_speed": data['wind']['speed'],
-    "weather": data['weather'][0]['main']
+# Extract useful info
+weather_info = {
+    "city": data["name"],
+    "temperature": data["main"]["temp"],
+    "humidity": data["main"]["humidity"],
+    "weather": data["weather"][0]["description"]
 }
 
-# Convert to a pandas DataFrame
-df = pd.DataFrame([features])
+# Save to CSV
+with open("weather_data.csv", mode="w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["City", "Temperature", "Humidity", "Weather"])
+    writer.writerow([weather_info["city"], weather_info["temperature"], weather_info["humidity"], weather_info["weather"]])
 
-# Save as CSV file
-csv_file = "weather_data.csv"
-if os.path.exists(csv_file):
-    df.to_csv(csv_file, mode='a', header=False, index=False)
-else:
-    df.to_csv(csv_file, index=False)
+print("Weather data saved successfully.")
 
-print("✅ Data saved successfully to weather_data.csv")
 
