@@ -5,7 +5,6 @@ from datetime import datetime
 
 # Get the key from your Replit secrets
 import os
-
 API_KEY = os.environ.get('RABIA_API_KEY', 'NOT FOUND')
 print("API Key from GitHub Secret:", API_KEY)
 CITY = "Gujrat"
