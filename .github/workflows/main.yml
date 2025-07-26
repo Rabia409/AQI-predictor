@@ -21,14 +21,13 @@ jobs:
       - name: Install dependencies
         run: pip install requests pandas
 
-          - name: Run script
+      - name: Run script
         env:
           RABIA_API_KEY: ${{ secrets.RABIA_API_KEY }}
         run: python main.py
 
       - name: Generate features
         run: python generate_features.py
-
 
       - name: Commit updated CSV
         run: |
