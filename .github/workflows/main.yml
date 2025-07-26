@@ -33,10 +33,21 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git pull origin main --rebase
-          git add weather_data.csv features.csv || true
-          git commit -m "Update weather and feature data" || true
-          git push
+
+          # Stash any changes (temporary save)
+          git stash
+
+          # Pull the latest code from GitHub
+          git pull origin main
+
+          # Apply the stashed changes back
+          git stash pop || echo "No stash to pop"
+
+          # Add, commit, and push changes
+          git add weather_data.csv
+          git commit -m "Update weather data"
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
