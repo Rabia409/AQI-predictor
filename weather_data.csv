@@ -1,6 +1,2 @@
 City,Temperature,Humidity,Weather
-<<<<<<< Updated upstream
-London,296.23,59,scattered clouds
-=======
-London,296.2,59,scattered clouds
->>>>>>> Stashed changes
+London,295.28,64,scattered clouds
